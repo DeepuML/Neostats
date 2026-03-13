@@ -139,8 +139,7 @@ def answer_user_query(query: str, provider: str, mode: str, top_k: int) -> str:
 
 def main() -> None:
     st.set_page_config(page_title="Simple RAG Chatbot", page_icon="💬", layout="wide")
-    st.title("Simple Chatbot (Data Folder Context + Web Search)")
-
+    st.title("Neostats RAG Chatbot")
     initialize_session_state()
 
     if not st.session_state.embedding_ready:
