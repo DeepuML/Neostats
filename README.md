@@ -24,24 +24,8 @@ The user interface should allow switching between two response styles:
 - Detailed Mode: Longer explanations with structured insights
 
 4. Modular Architecture
-The project must follow this folder structure:
+The project must follow this folder structure.
 
-project/
-├── config/
-│   └── config.py
-│
-├── models/
-│   ├── llm.py
-│   └── embeddings.py
-│
-├── utils/
-│   ├── rag.py
-│   ├── web_search.py
-│   └── document_loader.py
-│
-├── app.py
-├── requirements.txt
-└── README.md
 
 5. LLM Integration
 The chatbot should support at least one LLM provider such as:
