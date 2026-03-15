@@ -14,11 +14,14 @@ class Settings:
     openai_api_key: str = os.getenv("OPENAI_API_KEY", "")
     groq_api_key: str = os.getenv("GROQ_API_KEY", "")
     gemini_api_key: str = os.getenv("GEMINI_API_KEY", "")
+    euron_api_key: str = os.getenv("EURON_API_KEY", "")
     search_api_key: str = os.getenv("SEARCH_API_KEY", "")
 
     openai_model_name: str = os.getenv("OPENAI_MODEL_NAME", "gpt-4o-mini")
     groq_model_name: str = os.getenv("GROQ_MODEL_NAME", "llama-3.1-8b-instant")
     gemini_model_name: str = os.getenv("GEMINI_MODEL_NAME", "gemini-1.5-flash")
+    euron_model_name: str = os.getenv("EURON_MODEL_NAME", "gpt-5.3-instant")
+    euron_base_url: str = os.getenv("EURON_BASE_URL", "https://api.euron.one/api/v1/euri")
 
     embedding_model_name: str = os.getenv("EMBEDDING_MODEL_NAME", "sentence-transformers/all-MiniLM-L6-v2")
 
@@ -37,6 +40,7 @@ def validate_api_key(provider_name: str) -> None:
         "openai": settings.openai_api_key,
         "groq": settings.groq_api_key,
         "gemini": settings.gemini_api_key,
+        "euron": settings.euron_api_key,
     }
 
     if provider not in key_by_provider:
@@ -47,6 +51,7 @@ def validate_api_key(provider_name: str) -> None:
             "openai": "OPENAI_API_KEY",
             "groq": "GROQ_API_KEY",
             "gemini": "GEMINI_API_KEY",
+            "euron": "EURON_API_KEY",
         }[provider]
         raise ValueError(
             f"Missing API key for {provider_name}. Set environment variable {env_var_name}."

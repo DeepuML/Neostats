@@ -18,7 +18,20 @@ def load_embedding_model() -> SentenceTransformer:
 
     if _EMBEDDING_MODEL is None:
         settings = get_settings()
-        _EMBEDDING_MODEL = SentenceTransformer(settings.embedding_model_name)
+        model_name = settings.embedding_model_name
+
+        try:
+            _EMBEDDING_MODEL = SentenceTransformer(model_name, device="cpu")
+        except NotImplementedError as exc:
+            message = str(exc).lower()
+            if "meta tensor" not in message:
+                raise
+
+            _EMBEDDING_MODEL = SentenceTransformer(
+                model_name,
+                device="cpu",
+                model_kwargs={"low_cpu_mem_usage": False},
+            )
 
     return _EMBEDDING_MODEL
 

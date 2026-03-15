@@ -87,7 +87,7 @@ def render_sidebar() -> tuple[str, str, int]:
     with st.sidebar:
         st.header("Configuration")
 
-        provider = st.selectbox("Model Provider", ["OpenAI", "Groq", "Gemini"])
+        provider = st.selectbox("Model Provider", ["OpenAI", "Euron", "Groq", "Gemini"])
         mode = st.radio("Response Mode", ["Concise", "Detailed"], horizontal=True)
         top_k = st.slider("RAG Top K Chunks", min_value=1, max_value=8, value=4)
 

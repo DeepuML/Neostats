@@ -83,6 +83,13 @@ def load_model(provider_name: str) -> Any:
         if OpenAI is None:
             raise RuntimeError("openai package is not installed. Run: pip install openai")
         _ACTIVE_CLIENT = OpenAI(api_key=settings.openai_api_key)
+    elif provider == "euron":
+        if OpenAI is None:
+            raise RuntimeError("openai package is not installed. Run: pip install openai")
+        _ACTIVE_CLIENT = OpenAI(
+            api_key=settings.euron_api_key,
+            base_url=settings.euron_base_url,
+        )
     elif provider == "groq":
         if Groq is None:
             raise RuntimeError("groq package is not installed. Run: pip install groq")
@@ -116,6 +123,7 @@ def _get_active_model_name() -> str:
     settings = get_settings()
     model_by_provider = {
         "openai": settings.openai_model_name,
+        "euron": settings.euron_model_name,
         "groq": settings.groq_model_name,
         "gemini": settings.gemini_model_name,
     }
@@ -153,7 +161,7 @@ def generate_response(query: str, context: str, mode: str) -> str:
     prompt = _build_prompt(query=query, context=context, mode=mode)
 
     try:
-        if _ACTIVE_PROVIDER in {"openai", "groq"}:
+        if _ACTIVE_PROVIDER in {"openai", "euron", "groq"}:
             return _generate_openai_like_response(prompt)
 
         if _ACTIVE_PROVIDER == "gemini":
